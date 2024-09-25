@@ -1,0 +1,18 @@
+{
+  "name": "webproj",
+  "version": "1.0.0",
+  "description": "Simple web app",
+  "main": "man.js",
+  "scripts": {
+    "build": "node man.js",
+    "deploy": "gh-pages -d build"
+  },
+  "author": "AM",
+  "homepage": "https://Machar1a.github.io/portfolioProject",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "fs-extra": "^11.2.0"
+  }
+}

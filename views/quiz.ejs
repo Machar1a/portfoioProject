@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .choices {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .choice {
+            background-color: #e0e0e0;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .choice:hover {
+            background-color: #d4d4d4;
+        }
+
+        .choice input {
+            display: none;
+        }
+
+        .choice label {
+            display: block;
+            cursor: pointer;
+        }
+
+        .choice:checked {
+            background: linear-gradient(#5A2569, #5A2569);
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .selected {
+            background-color: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+    </style>
+    <script>
+
+        function selectChoice(choice) {
+            // Remove 'selected' class from all categories
+            const choices = document.querySelectorAll('.choice');
+            choices.forEach((cho) => {
+                cho.classList.remove('selected');
+            });
+
+            // Add 'selected' class to the clicked category
+            choice.classList.add('selected');
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>
+            <%= question %>
+        </h2>
+
+        <form action="/submit-answer" method="POST">
+            <div class="choices">
+                <% for(let i=0; i < choices.length; i++) { %>
+                    <div class="choice" onclick="selectChoice(this)">
+                        <input type="radio" id="choice-<%= i %>" name="answer" value="<%= choices[i] %>">
+                        <label for="choice-<%= i %>">
+                            <%= choices[i] %>
+                        </label>
+                    </div>
+                    <% } %>
+            </div>
+
+            <button type="submit">Submit Answer</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
